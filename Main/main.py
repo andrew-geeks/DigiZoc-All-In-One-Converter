@@ -17,10 +17,12 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         self.setWindowTitle('DigiZoc_v1.0')
         self.resize(900,600)
+        self.setMaximumHeight(600)
+        self.setMaximumWidth(900)
         self.setStyleSheet("background-color: white;")
         login_widget = Home(self)
         central_widget.addWidget(login_widget)
-
+        
     def back_to_home(self):#back_function
         logged_in_widget = Home(self)
         central_widget.addWidget(logged_in_widget)
@@ -38,20 +40,28 @@ class Home(QWidget): #Home_page
     def __init__(self,parent=None):
         super(Home, self).__init__(parent)
         welcome=QLabel('All In One Converter',self)
-        welcome.move(3,7)
+        welcome.move(7,7)
         welcome.setStyleSheet("QLabel {font: 25pt Times}")
         b1=QPushButton('Image\n Converters',self)
         b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
-        b1.move(40,80)
+        b1.move(60,100)
         b2=QPushButton('Document\n Converters',self)
         b2.setStyleSheet("background-color:red; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
-        b2.move(40,200)
+        b2.move(60,230)
         b3=QPushButton('Visual/Audio\n Converters',self)
         b3.setStyleSheet("background-color:black; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
-        b3.move(40,320)
-
+        b3.move(60,380)
+        frame = QFrame(self)
+        frame.resize(400,600)
+        frame.move(500,0)
+        frame.setStyleSheet("background-color: SlateBlue")
         #MainWindow.login(self)
-
+    def image_page(self):
+        pass
+    def visual_page(self):
+        pass
+    def doc_page(self):
+        pass
 
 
 
