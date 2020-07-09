@@ -37,9 +37,19 @@ class MainWindow(QMainWindow):
 class Home(QWidget): #Home_page
     def __init__(self,parent=None):
         super(Home, self).__init__(parent)
-        welcome=QLabel('Welcome,',self)
+        welcome=QLabel('All In One Converter',self)
         welcome.move(3,7)
-        welcome.setStyleSheet("QLabel {font: 30pt Times}")
+        welcome.setStyleSheet("QLabel {font: 25pt Times}")
+        b1=QPushButton('Image\n Converters',self)
+        b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
+        b1.move(40,80)
+        b2=QPushButton('Document\n Converters',self)
+        b2.setStyleSheet("background-color:red; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
+        b2.move(40,200)
+        b3=QPushButton('Visual/Audio\n Converters',self)
+        b3.setStyleSheet("background-color:black; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
+        b3.move(40,320)
+
         #MainWindow.login(self)
 
 
