@@ -37,3 +37,4 @@ def jpg_to_pdf_multiple(): #jpg_to_pdf_multiple
 
 def docx_to_pdf():  #docx_to_pdf  
     convert("test/input.docx", "test/output.pdf")
+

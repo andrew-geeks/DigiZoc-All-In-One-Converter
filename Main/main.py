@@ -17,8 +17,15 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         self.setWindowTitle('DigiZoc_v1.0')
         self.resize(900,600)
+        self.setStyleSheet("background-color: white;")
         login_widget = Home(self)
         central_widget.addWidget(login_widget)
+
+    def back_to_home(self):#back_function
+        logged_in_widget = Home(self)
+        central_widget.addWidget(logged_in_widget)
+        central_widget.setCurrentWidget(logged_in_widget)
+
     def login(self):
         logged_in_widget = LoggedWidget(self)
         central_widget.addWidget(logged_in_widget)
@@ -26,21 +33,20 @@ class MainWindow(QMainWindow):
 
 
 
-class Home(QWidget): #welcome_page
+
+class Home(QWidget): #Home_page
     def __init__(self,parent=None):
         super(Home, self).__init__(parent)
-        layout = QHBoxLayout()
-        self.button = QPushButton('Login')
-        layout.addWidget(self.button)
-        self.setLayout(layout)
-        self.show()
+        welcome=QLabel('Welcome,',self)
+        welcome.move(3,7)
+        welcome.setStyleSheet("QLabel {font: 30pt Times}")
         #MainWindow.login(self)
 
 
 
 
 
-class LoginWidget(QWidget):#home_page
+class LoginWidget(QWidget): #Anticipatory
     def __init__(self, parent=None):
         super(LoginWidget, self).__init__(parent)
         layout = QHBoxLayout()
