@@ -17,8 +17,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         self.setWindowTitle('DigiZoc_v1.0')
         self.resize(900,600)
-        self.setMaximumHeight(600)
-        self.setMaximumWidth(900)
+        #self.setMaximumHeight(600)
+        #self.setMaximumWidth(900)
         self.setStyleSheet("background-color: white;")
         login_widget = Home(self)
         central_widget.addWidget(login_widget)
@@ -38,6 +38,7 @@ class MainWindow(QMainWindow):
 
 class Home(QWidget): #Home_page
     def __init__(self,parent=None):
+        global frame
         super(Home, self).__init__(parent)
         welcome=QLabel('All In One Converter',self)
         welcome.move(7,7)
@@ -45,23 +46,59 @@ class Home(QWidget): #Home_page
         b1=QPushButton('Image\n Converters',self)
         b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
         b1.move(60,100)
+        b1.clicked.connect(self.image_page)
         b2=QPushButton('Document\n Converters',self)
         b2.setStyleSheet("background-color:red; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
         b2.move(60,230)
+        b2.clicked.connect(self.doc_page)
         b3=QPushButton('Visual/Audio\n Converters',self)
         b3.setStyleSheet("background-color:black; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
         b3.move(60,380)
-        frame = QFrame(self)
-        frame.resize(400,600)
+        b3.clicked.connect(self.visual_page)
+        frame=QFrame(self)
+        frame.setLayout
+        frame.hide()
+        frame.deleteLater()
+    def image_page(self): 
+        try:
+            frame.show()
+        except:
+            pass
+        layout=QVBoxLayout()
+        frame.setFixedSize(400,600)
         frame.move(500,0)
         frame.setStyleSheet("background-color: SlateBlue")
-        #MainWindow.login(self)
-    def image_page(self):
-        pass
+        frame.setLayout(layout)
+        heading=QLabel('Image Converter')
+        heading.setStyleSheet("QLabel {font: 15pt Times}")
+        layout.addWidget(heading)
+        b4=QPushButton('Jpg to Png')
+        b4.setStyleSheet("background-color:black; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        layout.addWidget(b4)
+        b4=QPushButton('Jpg to pdf')
+        b4.setStyleSheet("background-color:black; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        layout.addWidget(b4)
+        b5=QPushButton('Png to Ico')
+        b5.setStyleSheet("background-color:black; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        layout.addWidget(b5)
+        #b4.move(5,7)
+
     def visual_page(self):
-        pass
+        try:
+            frame.show()
+        except:
+            pass
+        frame.setFixedSize(400,600)
+        frame.move(500,0)
+        frame.setStyleSheet("background-color: SlateBlue")
     def doc_page(self):
-        pass
+        try:
+            frame.show()
+        except:
+            pass
+        frame.setFixedSize(400,600)
+        frame.move(500,0)
+        frame.setStyleSheet("background-color: SlateBlue")
 
 
 
