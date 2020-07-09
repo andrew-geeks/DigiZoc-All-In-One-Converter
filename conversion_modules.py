@@ -4,6 +4,7 @@ from fpdf import FPDF
 from docx2pdf import convert
 from moviepy.editor import *
 
+#modules
 def jpg_to_pdf():#jpg_to_pdf_single
     img_path='test/blr.jpg'
     pdf_path='test/blr.pdf'
