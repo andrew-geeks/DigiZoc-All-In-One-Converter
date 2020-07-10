@@ -11,6 +11,7 @@
  3. img2pdf
  4. Pillow
  5. docx2pdf
+ 6. fpdf
  
  # coversions
  1. jpg to pdf(single & multiple)
