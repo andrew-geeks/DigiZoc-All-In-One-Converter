@@ -138,16 +138,23 @@ class Home(QWidget): #Home_page
         b1=QPushButton('Docx to Pdf')
         b1.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b1)
+        b2=QPushButton('Txt to Pdf')
+        b2.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        framelayout.addWidget(b2)
 
 
 
 
-class Welcome(QWidget): #Anticipatory
+class Welcome(QWidget): #welcome_window_under_inspection
     def __init__(self, parent=None):
         super(Welcome, self).__init__(parent)
-        self.setStyleSheet('„ background-image: url(C:/Users/andre/Desktop/computer/computer projects/converter/DigiZoc/DigiZoc/Main/files/bg.png);')
-        # you might want to do self.button.click.connect(self.parent().login) here
-        QTimer.singleShot(2000, lambda:MainWindow.back_to_home(self))
+        self.label_2=QLabel(self)
+        self.label_2.move(0,0)
+        self.label_2.setStyleSheet("background-image : url(C:/Users/andre/Desktop/computer/computer projects/converter/DigiZoc/DigiZoc/Main/files/bg.png);")
+        self.label_2.setText("") 
+        self.label_2.resize(900,600)
+         
+        QTimer.singleShot(5000, lambda:MainWindow.back_to_home(self))
 
 
 class LoggedWidget(QWidget):

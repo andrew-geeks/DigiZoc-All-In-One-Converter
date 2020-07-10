@@ -38,3 +38,6 @@ def jpg_to_pdf_multiple(): #jpg_to_pdf_multiple
 def docx_to_pdf():  #docx_to_pdf  
     convert("test/input.docx", "test/output.pdf")
 
+def png_to_ico():
+    img = Image.open('2.png')
+    img.save('logo16.ico',format = 'ICO', sizes=[(32,32)])

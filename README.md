@@ -16,8 +16,9 @@
  1. jpg to pdf(single & multiple)
  2. jpg to png
  3. docx to pdf 
- 5. pdf to jpg(coming soon)
- 4. mp4 to mp3(coming soon)
+ 4. pdf to jpg(coming soon)
+ 5. mp4 to mp3(coming soon)
+ 6. png to ico
  
  # About
  Created by Andrew George Issac with the collabration of Synite Solutions.
