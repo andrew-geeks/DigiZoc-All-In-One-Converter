@@ -17,7 +17,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
         self.setWindowTitle('DigiZoc_v1.0')
         self.resize(900,600)
-        self.setWindowIcon(QIcon('files/logo.ico'))
+        
         #self.setMaximumHeight(600)
         #self.setMaximumWidth(900)
         self.setStyleSheet("background-color: white;")
@@ -70,10 +70,13 @@ class Home(QWidget): #Home_page
                 framelayout.itemAt(i).widget().deleteLater()
         except:
             pass
-        frame.setFixedSize(400,600)
-        frame.move(500,0)
-        frame.setStyleSheet("background-color: SlateBlue")
-        frame.setLayout(framelayout)
+        try:
+            frame.setFixedSize(400,600)
+            frame.move(500,0)
+            frame.setStyleSheet("background-color: SlateBlue")
+            frame.setLayout(framelayout)
+        except:
+            pass
         heading=QLabel('Image Converter')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
@@ -87,7 +90,6 @@ class Home(QWidget): #Home_page
         b5.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b5)
         
-
     def visual_page(self):
         try:
             frame.show()
@@ -95,12 +97,24 @@ class Home(QWidget): #Home_page
             pass
         try:
              for i in reversed(range(framelayout.count())): 
-                framelayout.itemAt(i).widget().deleteLater()
+                 framelayout.itemAt(i).widget().deleteLater()
         except:
             pass
-        frame.setFixedSize(400,600)
-        frame.move(500,0)
-        frame.setStyleSheet("background-color: SlateBlue")
+        try:
+            frame.setFixedSize(400,600)
+            frame.move(500,0)
+            frame.setStyleSheet("background-color: SlateBlue")
+            frame.setLayout(framelayout)
+        except:
+            pass
+        heading=QLabel('Visual/Audio Converters')
+        heading.setStyleSheet("QLabel {font: 25pt Times}")
+        framelayout.addWidget(heading)
+        b1=QPushButton('Mp4 to Mp3')
+        b1.setStyleSheet("background-color:black; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        framelayout.addWidget(b1)
+
+    
     def doc_page(self):
         try:
             frame.show()
@@ -111,14 +125,18 @@ class Home(QWidget): #Home_page
                 framelayout.itemAt(i).widget().deleteLater()
         except:
             pass
-        frame.setFixedSize(400,600)
-        frame.move(500,0)
-        frame.setStyleSheet("background-color: SlateBlue")
+        try:
+            frame.setFixedSize(400,600)
+            frame.move(500,0)
+            frame.setStyleSheet("background-color: SlateBlue")
+            frame.setLayout(framelayout)
+        except:
+            pass
         heading=QLabel('Document Converter')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
         b1=QPushButton('Docx to Pdf')
-        b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        b1.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b1)
 
 
@@ -127,10 +145,9 @@ class Home(QWidget): #Home_page
 class Welcome(QWidget): #Anticipatory
     def __init__(self, parent=None):
         super(Welcome, self).__init__(parent)
-        #self.setWindowIcon(QIcon('files/logo.ico'))
-        
-
+        self.setStyleSheet('„ background-image: url(C:/Users/andre/Desktop/computer/computer projects/converter/DigiZoc/DigiZoc/Main/files/bg.png);')
         # you might want to do self.button.click.connect(self.parent().login) here
+        QTimer.singleShot(2000, lambda:MainWindow.back_to_home(self))
 
 
 class LoggedWidget(QWidget):
@@ -145,6 +162,8 @@ class LoggedWidget(QWidget):
 
 if __name__ == '__main__':
     app = QApplication([])
+    app.setWindowIcon(QIcon('C:/Users/andre/Desktop/computer/computer projects/converter/DigiZoc/DigiZoc/Main/files/logo.ico'))
     window = MainWindow()
     window.show()
+    
     app.exec_()
