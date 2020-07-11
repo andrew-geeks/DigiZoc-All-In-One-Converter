@@ -34,7 +34,10 @@ class MainWindow(QMainWindow):
         central_widget.addWidget(logged_in_widget)
         central_widget.setCurrentWidget(logged_in_widget)
     
-
+    def to_settings_page(self):
+        logged_in_widget = settings(self)
+        central_widget.addWidget(logged_in_widget)
+        central_widget.setCurrentWidget(logged_in_widget)
 
 
 
@@ -61,6 +64,12 @@ class Home(QWidget): #Home_page
         frame=QFrame(self)
         frame.hide()
         framelayout=QVBoxLayout()
+        settings=QPushButton(self)
+        settings.setIcon(QIcon('main/files/settings.jpg'))
+        settings.setIconSize(QSize(30,30))
+        settings.setFlat(True)
+        settings.move(0,560)
+        settings.clicked.connect(lambda:MainWindow.to_settings_page(self))
     def image_page(self): 
         try:
             frame.show()
@@ -155,22 +164,50 @@ class Welcome(QWidget): #welcome_window_under_inspection
         self.label_2.setStyleSheet("background-image : url(Main/files/bg.jpg); background-attachment: fixed;")
         self.label_2.setText("") 
         self.label_2.resize(900,600)
-         
         QTimer.singleShot(2000, lambda:MainWindow.back_to_home(self))
 
 
 class jpg_to_png(QWidget): #jpg_to_png_page
     def __init__(self, parent=None):
         super(jpg_to_png, self).__init__(parent)
+        self.label_2=QLabel(self)
+        self.label_2.move(0,0)
+        self.label_2.setStyleSheet("background-image : url(Main/files/b1.jpg); background-attachment: fixed;")
+        self.label_2.setText("") 
+        self.label_2.resize(900,600)
         heading=QLabel('Jpg to Png',self)
-        heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
-        heading.move(360,0)
+        #heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
+        heading.setStyleSheet("background-color: rgba(255, 255, 255, 10);")
+        heading.setFont(QFont('Times',30))
+        heading.move(360,10)
         self.bbutton=QPushButton(self)
         self.bbutton.setIcon(QIcon('main/files/backbutton.ico'))
         self.bbutton.setIconSize(QSize(30,30))
         self.bbutton.setFlat(True)
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(850,7)
+
+
+class settings(QWidget):
+    def __init__(self, parent=None):
+        super(settings,self).__init__(parent)
+        self.label_2=QLabel(self)
+        self.label_2.move(0,0)
+        self.label_2.setStyleSheet("background-image : url(Main/files/b4.jpg); background-attachment: fixed;")
+        self.label_2.setText("") 
+        self.label_2.resize(900,600)
+        heading=QLabel('Settings',self)
+        #heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
+        heading.setStyleSheet("background-color: rgba(255, 255, 255, 10);")
+        heading.setFont(QFont('Times',40))
+        heading.move(370,10)
+        self.bbutton=QPushButton(self)
+        self.bbutton.setIcon(QIcon('main/files/backbutton.ico'))
+        self.bbutton.setIconSize(QSize(30,30))
+        self.bbutton.setFlat(True)
+        self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
+        self.bbutton.move(830,7)
+
 
 
 if __name__ == '__main__':
