@@ -29,10 +29,11 @@ class MainWindow(QMainWindow):
         central_widget.addWidget(logged_in_widget)
         central_widget.setCurrentWidget(logged_in_widget)
 
-    def login(self):
-        logged_in_widget = LoggedWidget(self)
+    def to_jpg_to_png(self):
+        logged_in_widget = jpg_to_png(self)
         central_widget.addWidget(logged_in_widget)
         central_widget.setCurrentWidget(logged_in_widget)
+    
 
 
 
@@ -80,9 +81,10 @@ class Home(QWidget): #Home_page
         heading=QLabel('Image Converters')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
-        b4=QPushButton('Jpg to Png')
-        b4.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
-        framelayout.addWidget(b4)
+        b1=QPushButton('Jpg to Png')
+        b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        framelayout.addWidget(b1)
+        b1.clicked.connect(lambda:MainWindow.to_jpg_to_png(self))
         b4=QPushButton('Jpg to pdf')
         b4.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b4)
@@ -154,17 +156,21 @@ class Welcome(QWidget): #welcome_window_under_inspection
         self.label_2.setText("") 
         self.label_2.resize(900,600)
          
-        QTimer.singleShot(3000, lambda:MainWindow.back_to_home(self))
+        QTimer.singleShot(2000, lambda:MainWindow.back_to_home(self))
 
 
-class LoggedWidget(QWidget):
+class jpg_to_png(QWidget): #jpg_to_png_page
     def __init__(self, parent=None):
-        super(LoggedWidget, self).__init__(parent)
-        layout = QHBoxLayout()
-        self.label = QLabel('logged in!')
-        layout.addWidget(self.label)
-        self.setLayout(layout)
-
+        super(jpg_to_png, self).__init__(parent)
+        heading=QLabel('Jpg to Png',self)
+        heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
+        heading.move(360,0)
+        self.bbutton=QPushButton(self)
+        self.bbutton.setIcon(QIcon('main/files/backbutton.ico'))
+        self.bbutton.setIconSize(QSize(30,30))
+        self.bbutton.setFlat(True)
+        self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
+        self.bbutton.move(850,7)
 
 
 if __name__ == '__main__':
