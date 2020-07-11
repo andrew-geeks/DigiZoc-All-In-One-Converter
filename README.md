@@ -2,7 +2,9 @@
  All in one converter developed using python PyQt.
  
  Latest version: 1.0
+ 
  Interface Used: Qt
+ 
  All releases can be found @ the releases page!
  
  # Libraries Used
