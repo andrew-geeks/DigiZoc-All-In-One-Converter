@@ -1,5 +1,5 @@
 # DigiZoc
- All in one converter developed using python PyQt.
+ All in one converter application developed using python PyQt.
  
  Latest version: 1.0
  
