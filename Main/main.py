@@ -8,6 +8,7 @@ from fpdf import FPDF
 from docx2pdf import convert
 from moviepy.editor import *
 import json
+import threading
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -190,6 +191,29 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(850,7)
     
+class path_change(QThread):#path_changing_class
+    def __init__(self):
+        QThread.__init__(self)
+        dir_ = QFileDialog.getExistingDirectory(None, 'Select a folder:', 'C://',QFileDialog.ShowDirsOnly)
+        if dir_=='':
+            pass
+        else:
+            data={'main':{'path':dir_}}
+            with open("path.json", "w") as write_file:
+                json.dump(data, write_file)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Output path changed!")
+            msg.setWindowTitle("Done!")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()       
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        # your logic here
+        pass
+
 
 class settings(QWidget): #settings_page
     def __init__(self, parent=None):
@@ -214,7 +238,7 @@ class settings(QWidget): #settings_page
         self.infob.setIcon(QIcon('main/files/info.ico'))
         self.infob.setIconSize(QSize(40,40))
         self.infob.setFlat(True)
-        self.infob.clicked.connect(self.store)
+        self.infob.clicked.connect(lambda:MainWindow.to_info_page(self))
         self.infob.move(825,40)
         self.path=QLabel(self)
         self.plabel=QLabel('Output folder path: ',self)
@@ -222,12 +246,11 @@ class settings(QWidget): #settings_page
         self.plabel.move(30,170)        
         self.change=QPushButton('Change',self)
         self.change.move(50,215)
-    def store(self):
-            print('hello')
-            data={'main':{'path':'Main/output'}}
-            with open("path.json", "w") as write_file:
-                json.dump(data, write_file)
-
+        self.change.clicked.connect(self.thread_)
+    def thread_(self):
+        self.myThread = path_change()
+        self.myThread.start()
+    
 
 class info_page(QWidget): #info_page
     def __init__(self, parent=None):
