@@ -7,7 +7,7 @@ from PIL import Image
 from fpdf import FPDF
 from docx2pdf import convert
 from moviepy.editor import *
-import time
+import json
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -189,7 +189,7 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.bbutton.setFlat(True)
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(850,7)
-
+    
 
 class settings(QWidget): #settings_page
     def __init__(self, parent=None):
@@ -214,7 +214,7 @@ class settings(QWidget): #settings_page
         self.infob.setIcon(QIcon('main/files/info.ico'))
         self.infob.setIconSize(QSize(40,40))
         self.infob.setFlat(True)
-        self.infob.clicked.connect(lambda:MainWindow.to_info_page(self))
+        self.infob.clicked.connect(self.store)
         self.infob.move(825,40)
         self.path=QLabel(self)
         self.plabel=QLabel('Output folder path: ',self)
@@ -222,6 +222,12 @@ class settings(QWidget): #settings_page
         self.plabel.move(30,170)        
         self.change=QPushButton('Change',self)
         self.change.move(50,215)
+    def store(self):
+            print('hello')
+            data={'main':{'path':'Main/output'}}
+            with open("path.json", "w") as write_file:
+                json.dump(data, write_file)
+
 
 class info_page(QWidget): #info_page
     def __init__(self, parent=None):
