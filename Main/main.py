@@ -39,7 +39,10 @@ class MainWindow(QMainWindow):
         central_widget.addWidget(logged_in_widget)
         central_widget.setCurrentWidget(logged_in_widget)
 
-
+    def to_info_page(self):
+        logged_in_widget = info_page(self)
+        central_widget.addWidget(logged_in_widget)
+        central_widget.setCurrentWidget(logged_in_widget)
 
 class Home(QWidget): #Home_page
     def __init__(self,parent=None):
@@ -188,7 +191,7 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.bbutton.move(850,7)
 
 
-class settings(QWidget):
+class settings(QWidget): #settings_page
     def __init__(self, parent=None):
         super(settings,self).__init__(parent)
         self.label_2=QLabel(self)
@@ -207,8 +210,22 @@ class settings(QWidget):
         self.bbutton.setFlat(True)
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(830,7)
+        self.infob=QPushButton(self)
+        self.infob.setIcon(QIcon('main/files/info.ico'))
+        self.infob.setIconSize(QSize(40,40))
+        self.infob.setFlat(True)
+        self.infob.clicked.connect(lambda:MainWindow.to_info_page(self))
+        self.infob.move(825,40)
+        self.path=QLabel(self)
+        self.plabel=QLabel('Output folder path: ',self)
+        self.plabel.setFont(QFont('Times',15))
+        self.plabel.move(30,170)        
+        self.change=QPushButton('Change',self)
+        self.change.move(50,215)
 
-
+class info_page(QWidget): #info_page
+    def __init__(self, parent=None):
+        super(info_page,self).__init__(parent)
 
 if __name__ == '__main__':
     app = QApplication([])
