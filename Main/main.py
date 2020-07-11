@@ -77,7 +77,7 @@ class Home(QWidget): #Home_page
             frame.setLayout(framelayout)
         except:
             pass
-        heading=QLabel('Image Converter')
+        heading=QLabel('Image Converters')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
         b4=QPushButton('Jpg to Png')
@@ -132,7 +132,7 @@ class Home(QWidget): #Home_page
             frame.setLayout(framelayout)
         except:
             pass
-        heading=QLabel('Document Converter')
+        heading=QLabel('Document Converters')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
         b1=QPushButton('Docx to Pdf')
@@ -149,12 +149,12 @@ class Welcome(QWidget): #welcome_window_under_inspection
     def __init__(self, parent=None):
         super(Welcome, self).__init__(parent)
         self.label_2=QLabel(self)
-        self.label_2.move(0,0)
-        self.label_2.setStyleSheet("background-image : url(C:/Users/andre/Desktop/computer/computer projects/converter/DigiZoc/DigiZoc/Main/files/bg.png);")
+        self.label_2.move(80,40)
+        self.label_2.setStyleSheet("background-image : url(Main/files/bg.jpg); background-attachment: fixed;")
         self.label_2.setText("") 
         self.label_2.resize(900,600)
          
-        QTimer.singleShot(5000, lambda:MainWindow.back_to_home(self))
+        QTimer.singleShot(3000, lambda:MainWindow.back_to_home(self))
 
 
 class LoggedWidget(QWidget):
@@ -169,7 +169,7 @@ class LoggedWidget(QWidget):
 
 if __name__ == '__main__':
     app = QApplication([])
-    app.setWindowIcon(QIcon('C:/Users/andre/Desktop/computer/computer projects/converter/DigiZoc/DigiZoc/Main/files/logo.ico'))
+    app.setWindowIcon(QIcon('Main/files/logo.ico'))
     window = MainWindow()
     window.show()
     
