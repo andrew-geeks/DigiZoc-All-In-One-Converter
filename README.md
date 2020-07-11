@@ -35,5 +35,7 @@
  
  Instagram: https://www.instagram.com/_andrewgeeks , https://www.instagram.com/synite_solutions
  
+ # Images
+ ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/bg1.png?raw=true)
  
- 
+ ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/logo.ico?raw=true)
