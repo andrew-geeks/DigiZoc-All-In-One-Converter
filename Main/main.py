@@ -10,6 +10,13 @@ from moviepy.editor import *
 import json
 import threading
 
+with open('path.json') as file:
+    data=json.load(file)
+
+a=data['main']
+file_path=a['path']
+
+
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         global central_widget
@@ -190,7 +197,8 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.bbutton.setFlat(True)
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(850,7)
-    
+
+   
 class path_change(QThread):#path_changing_class
     def __init__(self):
         QThread.__init__(self)
@@ -201,6 +209,11 @@ class path_change(QThread):#path_changing_class
             data={'main':{'path':dir_}}
             with open("path.json", "w") as write_file:
                 json.dump(data, write_file)
+            with open("path.json") as write_file:
+                data=json.load(write_file)
+                a=data['main']
+                file_path=a['path']
+            plabel.setText(file_path)   
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
             msg.setText("Output path changed!")
@@ -218,6 +231,7 @@ class path_change(QThread):#path_changing_class
 class settings(QWidget): #settings_page
     def __init__(self, parent=None):
         super(settings,self).__init__(parent)
+        global plabel
         self.label_2=QLabel(self)
         self.label_2.move(0,0)
         self.label_2.setStyleSheet("background-image : url(Main/files/b4.jpg); background-attachment: fixed;")
@@ -241,11 +255,13 @@ class settings(QWidget): #settings_page
         self.infob.clicked.connect(lambda:MainWindow.to_info_page(self))
         self.infob.move(825,40)
         self.path=QLabel(self)
-        self.plabel=QLabel('Output folder path: ',self)
-        self.plabel.setFont(QFont('Times',15))
-        self.plabel.move(30,170)        
+        plabel=QLabel('Output folder path: '+file_path,self)
+        plabel.setWordWrap(True)
+        plabel.setFont(QFont('Times',15))
+        plabel.move(30,170)     
+        
         self.change=QPushButton('Change',self)
-        self.change.move(50,215)
+        self.change.move(50,300)
         self.change.clicked.connect(self.thread_)
     def thread_(self):
         self.myThread = path_change()
