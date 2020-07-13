@@ -197,7 +197,10 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.bbutton.setFlat(True)
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(850,7)
-
+        tlabel1=QLabel('*no file selected',self)
+        tlabel1.move(100,250)
+        self.line=QLabel('Select file to convert:',self)
+        self.line.move(100,280)
    
 class path_change(QThread):#path_changing_class
     def __init__(self):
