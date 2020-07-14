@@ -201,7 +201,14 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         tlabel1.move(100,250)
         self.line=QLabel('Select file to convert:',self)
         self.line.move(100,280)
-   
+        self.browse=QPushButton('Browse',self)
+        self.browse.move(200,270)
+        self.browse.clicked.connect(self.browse1)
+    def browse1(self):
+        fileName_=QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","JPG (*.jpg);;All Files (*)")
+        print(fileName_)
+
+
 class path_change(QThread):#path_changing_class
     def __init__(self):
         QThread.__init__(self)
