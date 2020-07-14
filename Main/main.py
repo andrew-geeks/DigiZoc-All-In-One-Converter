@@ -206,8 +206,28 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.browse.clicked.connect(self.browse1)
     def browse1(self):
         fileName_=QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","JPG (*.jpg);;All Files (*)")
-        print(fileName_)
-
+        self.filenme=fileName_[0]
+        fl=self.filenme.split('/')
+        fname1=fl[len(fl)-1]
+        f=fname1.split('.')
+        self.fname=f[0]
+        self.convert()
+    def convert(self):
+        try:
+             Image.open(self.filenme).save(file_path+'/'+self.fname+'.png')
+             msg = QMessageBox()
+             msg.setIcon(QMessageBox.Information)
+             msg.setText("Conversion Complete")
+             msg.setWindowTitle("Success")
+             msg.setStandardButtons(QMessageBox.Ok)
+             retval = msg.exec_()   
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Error)
+            msg.setText("Conversion Failed")
+            msg.setWindowTitle("Error")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()   
 
 class path_change(QThread):#path_changing_class
     def __init__(self):
