@@ -197,13 +197,17 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         self.bbutton.setFlat(True)
         self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         self.bbutton.move(850,7)
-        tlabel1=QLabel('*no file selected',self)
-        tlabel1.move(100,250)
+        self.tlabel1=QLabel('*no file selected',self)
+        self.tlabel1.move(100,250)
         self.line=QLabel('Select file to convert:',self)
         self.line.move(100,280)
         self.browse=QPushButton('Browse',self)
         self.browse.move(200,270)
         self.browse.clicked.connect(self.browse1)
+        self.convbutton=QPushButton('Convert',self)
+        self.convbutton.move(100,360)
+        self.convbutton.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 8px;padding: 6px; color:white")
+        self.convbutton.clicked.connect(self.conv)
     def browse1(self):
         fileName_=QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","JPG (*.jpg);;All Files (*)")
         self.filenme=fileName_[0]
@@ -211,10 +215,28 @@ class jpg_to_png(QWidget): #jpg_to_png_page
         fname1=fl[len(fl)-1]
         f=fname1.split('.')
         self.fname=f[0]
-        self.convert()
+        if self.fname=='':
+            pass
+        else:
+            self.tlabel1.setText(self.fname+'.'+f[1])
+
+    def conv(self):
+        try:
+            if self.fname=='':
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText("Select a file to convert")
+                msg.setWindowTitle("Error")
+                msg.setStandardButtons(QMessageBox.Ok)
+                retval = msg.exec_()   
+            else:
+                self.convert()
+        except:
+            self.browse1()
     def convert(self):
         try:
              Image.open(self.filenme).save(file_path+'/'+self.fname+'.png')
+             MainWindow.back_to_home(self)
              msg = QMessageBox()
              msg.setIcon(QMessageBox.Information)
              msg.setText("Conversion Complete")
