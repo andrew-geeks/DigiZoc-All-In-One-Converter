@@ -52,6 +52,12 @@ class MainWindow(QMainWindow):
         central_widget.addWidget(logged_in_widget)
         central_widget.setCurrentWidget(logged_in_widget)
 
+    def to_jpg_to_pdf(self):
+        logged_in_widget = jpg_to_pdf(self)
+        central_widget.addWidget(logged_in_widget)
+        central_widget.setCurrentWidget(logged_in_widget)
+
+
 class Home(QWidget): #Home_page
     def __init__(self,parent=None):
         global frame
@@ -107,6 +113,7 @@ class Home(QWidget): #Home_page
         b1.clicked.connect(lambda:MainWindow.to_jpg_to_png(self))
         b4=QPushButton('Jpg to pdf')
         b4.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        b4.clicked.connect(lambda:MainWindow.to_jpg_to_pdf(self))
         framelayout.addWidget(b4)
         b5=QPushButton('Png to Ico')
         b5.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
@@ -176,6 +183,103 @@ class Welcome(QWidget): #welcome_window_under_inspection
         self.label_2.setText("") 
         self.label_2.resize(900,600)
         QTimer.singleShot(2000, lambda:MainWindow.back_to_home(self))
+
+class jpg_to_pdf(QWidget): #jpg_to_pdf_page
+    def __init__(self, parent=None):
+        super(jpg_to_pdf,self).__init__(parent)
+        self.label_2=QLabel(self)
+        self.label_2.move(0,0)
+        self.label_2.setStyleSheet("background-image : url(Main/files/b1.jpg); background-attachment: fixed;")
+        self.label_2.setText("") 
+        self.label_2.resize(900,600)
+        heading=QLabel('Jpg to Pdf',self)
+        #heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
+        heading.setStyleSheet("background-color: rgba(255, 255, 255, 10);")
+        heading.setFont(QFont('Times',30))
+        heading.move(360,10)
+        self.bbutton=QPushButton(self)
+        self.bbutton.setIcon(QIcon('main/files/backbutton.ico'))
+        self.bbutton.setIconSize(QSize(30,30))
+        self.bbutton.setFlat(True)
+        self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
+        self.bbutton.move(850,7)
+        self.tlabel1=QLabel('*no file selected',self)
+        self.tlabel1.move(100,250)
+        self.line=QLabel('Select file to convert:',self)
+        self.line.move(100,280)
+        self.browse=QPushButton('Browse',self)
+        self.browse.move(200,270)
+        self.browse.clicked.connect(self.browse1)
+        self.text=QLabel('File name:',self)
+        self.text.move(100,360)
+        self.filenme=QLineEdit(self)
+        self.filenme.setPlaceholderText('File name for PDF')
+        self.filenme.move(160,355)
+        self.convbutton=QPushButton('Convert',self)
+        self.convbutton.move(100,400)
+        self.convbutton.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 8px;padding: 6px; color:white")
+        self.convbutton.clicked.connect(self.conv)
+    def browse1(self):
+        fileName_=QFileDialog.getOpenFileNames(self,"QFileDialog.getOpenFileName()", "","JPG (*.jpg);;All Files (*)")
+        self.filelist=fileName_[0]
+        if len(self.filelist)==0:
+            pass
+        else:
+            self.tlabel1.setText(str(len(self.filelist))+''+'files selected!')
+
+
+    def conv(self):
+        self.filenm=self.filenme.text()
+        try:
+            if len(self.filelist)==0:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText("Select a file to convert")
+                msg.setWindowTitle("Error")
+                msg.setStandardButtons(QMessageBox.Ok)
+                retval = msg.exec_()   
+            elif self.filenm=='':
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Warning)
+                msg.setText("Enter file name")
+                msg.setWindowTitle("Error")
+                msg.setStandardButtons(QMessageBox.Ok)
+                retval = msg.exec_()  
+            else:
+                self.convert()
+        except:
+            self.browse1()
+
+    def convert(self):
+        try:
+            x=y=0
+            pdf = FPDF()
+            for i in range(len(self.filelist)):
+                img=Image.open(self.filelist[i])
+                w,h=img.size
+                w,h=float(w * 0.264583), float(h * 0.264583)
+                pdf_size = {'P': {'w': 210, 'h': 297}, 'L': {'w': 297, 'h': 210}}
+                orientation = 'P' if w < h else 'L'
+                w = w if w < pdf_size[orientation]['w'] else pdf_size[orientation]['w']
+                h = h if h < pdf_size[orientation]['h'] else pdf_size[orientation]['h']
+                pdf.add_page(orientation=orientation)
+                pdf.image(self.filelist[i],x,y,w,h)
+            pdf.output(file_path+'/'+self.filenm+'.pdf', "F")
+            MainWindow.back_to_home(self)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Conversion Complete")
+            msg.setWindowTitle("Success")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()   
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Error)
+            msg.setText("Conversion Failed")
+            msg.setWindowTitle("Error")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()   
+
 
 
 class jpg_to_png(QWidget): #jpg_to_png_page
