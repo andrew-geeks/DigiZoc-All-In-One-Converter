@@ -71,7 +71,7 @@ class Home(QWidget): #Home_page
         super(Home, self).__init__(parent)
         welcome=QLabel('All In One Converter',self)
         welcome.move(7,7)
-        welcome.setStyleSheet("QLabel {font: 25pt Times}")
+        welcome.setStyleSheet("QLabel {font: 30pt Times}")
         b1=QPushButton('Image\n Converters',self)
         b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 20em; min-height: 5em; border-radius: 10px;padding: 6px; color:white")
         b1.move(60,100)
@@ -93,6 +93,9 @@ class Home(QWidget): #Home_page
         settings.setFlat(True)
         settings.move(0,560)
         settings.clicked.connect(lambda:MainWindow.to_settings_page(self))
+        self.slogan=QLabel('Easy\nReliable\nConvenient',self)
+        self.slogan.setStyleSheet("QLabel {font: 55pt Chiller}")
+        self.slogan.move(560,200)
     def image_page(self): 
         try:
             frame.show()
@@ -110,6 +113,7 @@ class Home(QWidget): #Home_page
             frame.setLayout(framelayout)
         except:
             pass
+        self.slogan.setVisible(False)
         heading=QLabel('Image Converters')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
@@ -117,7 +121,7 @@ class Home(QWidget): #Home_page
         bbutton.setIcon(QIcon('main/files/backbutton.ico'))
         bbutton.setIconSize(QSize(30,30))
         bbutton.setFlat(True)
-        bbutton.clicked.connect(lambda:frame.hide())
+        bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         framelayout.addWidget(bbutton)
         b1=QPushButton('Jpg to Png')
         b1.setStyleSheet("background-color:green; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
@@ -149,6 +153,7 @@ class Home(QWidget): #Home_page
             frame.setLayout(framelayout)
         except:
             pass
+        self.slogan.setVisible(False)
         heading=QLabel('Visual/Audio Converters')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
@@ -157,12 +162,12 @@ class Home(QWidget): #Home_page
         bbutton.setIconSize(QSize(30,30))
         bbutton.setFlat(True)
         framelayout.addWidget(bbutton)
-        bbutton.clicked.connect(lambda:frame.hide())
+        bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         b1=QPushButton('Mp4 to Mp3')
         b1.setStyleSheet("background-color:black; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b1)
 
-    
+
     def doc_page(self):
         try:
             frame.show()
@@ -180,6 +185,7 @@ class Home(QWidget): #Home_page
             frame.setLayout(framelayout)
         except:
             pass
+        self.slogan.setVisible(False)
         heading=QLabel('Document Converters')
         heading.setStyleSheet("QLabel {font: 25pt Times}")
         framelayout.addWidget(heading)
@@ -187,7 +193,7 @@ class Home(QWidget): #Home_page
         bbutton.setIcon(QIcon('main/files/backbutton.ico'))
         bbutton.setIconSize(QSize(30,30))
         bbutton.setFlat(True)
-        bbutton.clicked.connect(lambda:frame.hide())
+        bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
         framelayout.addWidget(bbutton)
         b1=QPushButton('Docx to Pdf')
         b1.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
