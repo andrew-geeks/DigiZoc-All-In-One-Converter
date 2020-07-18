@@ -736,9 +736,9 @@ class info_page(QWidget): #info_page
         self.l3=QLabel('License: Apache',self)
         self.l3.setFont(QFont('Helvitica',20))
         self.l3.move(335,250)
-        self.l4=QLabel('Created by: Andrew',self)
+        self.l4=QLabel('Created by: Andrew George Issac(Synite Solutions)',self)
         self.l4.setFont(QFont('Helvitica',20))
-        self.l4.move(300,300)
+        self.l4.move(220,300)
 
 
 
