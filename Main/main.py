@@ -711,6 +711,38 @@ class settings(QWidget): #settings_page
 class info_page(QWidget): #info_page
     def __init__(self, parent=None):
         super(info_page,self).__init__(parent)
+        self.label_2=QLabel(self)
+        self.label_2.move(0,0)
+        self.label_2.setStyleSheet("background-image : url(Main/files/b4.jpg); background-attachment: fixed;")
+        self.label_2.setText("") 
+        self.label_2.resize(900,600)
+        heading=QLabel('    Info',self)
+        #heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
+        heading.setStyleSheet("background-color: rgba(255, 255, 255, 10);")
+        heading.setFont(QFont('Times',40))
+        heading.move(370,10)
+        self.bbutton=QPushButton(self)
+        self.bbutton.setIcon(QIcon('main/files/backbutton.ico'))
+        self.bbutton.setIconSize(QSize(30,30))
+        self.bbutton.setFlat(True)
+        self.bbutton.clicked.connect(lambda:MainWindow.to_settings_page(self))
+        self.bbutton.move(830,7)
+        self.l1=QLabel('Software Type: Conversion Software',self)
+        self.l1.setFont(QFont('Helvitica',20))
+        self.l1.move(250,150)
+        self.l2=QLabel('Version: 1.0',self)
+        self.l2.setFont(QFont('Helvitica',20))
+        self.l2.move(335,200)
+        self.l3=QLabel('License: Apache',self)
+        self.l3.setFont(QFont('Helvitica',20))
+        self.l3.move(335,250)
+        self.l4=QLabel('Created by: Andrew',self)
+        self.l4.setFont(QFont('Helvitica',20))
+        self.l4.move(300,300)
+
+
+
+
 
 if __name__ == '__main__':
     app = QApplication([])
