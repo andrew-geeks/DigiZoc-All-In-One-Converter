@@ -22,6 +22,7 @@
  4. pdf to jpg(coming soon)
  5. mp4 to mp3(coming soon)
  6. png to ico
+ 7. txt to pdf
  
  # About
  Created by Andrew George Issac with the collabration of Synite Solutions.
