@@ -733,13 +733,13 @@ class info_page(QWidget): #info_page
         self.l2=QLabel('Version: 1.0',self)
         self.l2.setFont(QFont('Helvitica',20))
         self.l2.move(335,200)
-        self.l3=QLabel('License: Apache',self)
+        self.l3=QLabel('License: Apache 2.0',self)
         self.l3.setFont(QFont('Helvitica',20))
         self.l3.move(335,250)
         self.l4=QLabel('Created by: Andrew George Issac(Synite Solutions)',self)
         self.l4.setFont(QFont('Helvitica',20))
         self.l4.move(220,300)
-
+        
 
 
 
