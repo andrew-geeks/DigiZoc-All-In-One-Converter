@@ -40,3 +40,10 @@
  ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/bg1.png?raw=true)
  
  ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/logo.ico?raw=true)
+ 
+ 
+ ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/home.JPG)
+ 
+ ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/pnghome.JPG)
+ 
+  ![alt text](https://github.com/andrew-geeks/DigiZoc-All-In-One-Converter/blob/master/Main/files/imgc.JPG)
