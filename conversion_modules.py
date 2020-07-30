@@ -4,6 +4,7 @@ from fpdf import FPDF
 from docx2pdf import convert
 from moviepy.editor import *
 import mammoth
+
 #modules
 def jpg_to_pdf():#jpg_to_pdf_single
     img_path='test/blr.jpg'
@@ -51,4 +52,3 @@ def docx_to_html(): #docx_to_html
     b.close()
     print('Done!')
 
-docx_to_html()

@@ -14,6 +14,7 @@
  4. Pillow
  5. docx2pdf
  6. fpdf
+ 7. mammoth
  
  # coversions
  1. jpg to pdf(single & multiple)

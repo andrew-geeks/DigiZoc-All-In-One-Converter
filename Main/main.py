@@ -212,6 +212,10 @@ class Home(QWidget): #Home_page
         b2.clicked.connect(lambda:MainWindow.to_txt_to_pdf(self))
         b2.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b2)
+        b3=QPushButton('Docx to html')
+        #b3.clicked.connect(lambda:MainWindow.to_txt_to_pdf(self))
+        b3.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
+        framelayout.addWidget(b3)
 
 
 
