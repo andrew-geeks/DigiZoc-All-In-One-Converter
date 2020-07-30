@@ -3,7 +3,7 @@ from PIL import Image
 from fpdf import FPDF
 from docx2pdf import convert
 from moviepy.editor import *
-
+import mammoth
 #modules
 def jpg_to_pdf():#jpg_to_pdf_single
     img_path='test/blr.jpg'
@@ -41,3 +41,14 @@ def docx_to_pdf():  #docx_to_pdf
 def png_to_ico():
     img = Image.open('2.png')
     img.save('logo16.ico',format = 'ICO', sizes=[(32,32)])
+
+def docx_to_html(): #docx_to_html
+    f = open("Main/test.docx", 'rb')
+    b = open('Main/test1.html', 'wb')
+    document = mammoth.convert_to_html(f)
+    b.write(document.value.encode('utf8'))
+    f.close()
+    b.close()
+    print('Done!')
+
+docx_to_html()
