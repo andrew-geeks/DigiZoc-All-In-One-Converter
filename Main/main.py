@@ -9,6 +9,7 @@ from docx2pdf import convert
 from moviepy.editor import *
 import json
 import threading
+import mammoth
 
 with open('path.json') as file:
     data=json.load(file)
@@ -72,6 +73,10 @@ class MainWindow(QMainWindow):
         central_widget.addWidget(logged_in_widget)
         central_widget.setCurrentWidget(logged_in_widget)
 
+    def to_docx_to_html(self):
+        logged_in_widget = docx_to_html(self)
+        central_widget.addWidget(logged_in_widget)
+        central_widget.setCurrentWidget(logged_in_widget)
 
 class Home(QWidget): #Home_page
     def __init__(self,parent=None):
@@ -213,7 +218,7 @@ class Home(QWidget): #Home_page
         b2.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b2)
         b3=QPushButton('Docx to html')
-        #b3.clicked.connect(lambda:MainWindow.to_txt_to_pdf(self))
+        b3.clicked.connect(lambda:MainWindow.to_docx_to_html(self))
         b3.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 10px;padding: 6px; color:white")
         framelayout.addWidget(b3)
 
@@ -588,6 +593,88 @@ class docx_to_pdf(QWidget): #docx_to_pdf_page
         msg.setWindowTitle("Success")
         msg.setStandardButtons(QMessageBox.Ok)
         retval = msg.exec_()
+
+
+
+
+class docx_to_html(QWidget):
+    def __init__(self, parent=None):
+        super(docx_to_html,self).__init__(parent)
+        self.label_2=QLabel(self)
+        self.label_2.move(0,0)
+        self.label_2.setStyleSheet("background-image : url(Main/files/b2.jpg); background-attachment: fixed;")
+        self.label_2.setText("") 
+        self.label_2.resize(900,600)
+        heading=QLabel('Docx to html',self)
+        #heading.setStyleSheet("QLabel {font: 25pt Helvitica}")
+        heading.setStyleSheet("background-color: rgba(255, 255, 255, 10);")
+        heading.setFont(QFont('Times',30))
+        heading.move(360,10)
+        self.bbutton=QPushButton(self)
+        self.bbutton.setIcon(QIcon('main/files/backbutton.ico'))
+        self.bbutton.setIconSize(QSize(30,30))
+        self.bbutton.setFlat(True)
+        self.bbutton.clicked.connect(lambda:MainWindow.back_to_home(self))
+        self.bbutton.move(850,7)
+        self.tlabel1=QLabel('*no file selected',self)
+        self.tlabel1.move(100,250)
+        self.line=QLabel('Select file to convert:',self)
+        self.line.move(100,280)
+        self.browse=QPushButton('Browse',self)
+        self.browse.move(200,270)
+        self.browse.clicked.connect(self.browse1)
+        self.convbutton=QPushButton('Convert',self)
+        self.convbutton.move(100,360)
+        self.convbutton.setStyleSheet("background-color:red; font: bold 14px; min-width: 7em; min-height: 2em; border-radius: 8px;padding: 6px; color:white")
+        self.convbutton.clicked.connect(self.conv)
+    def browse1(self):
+        fileName_=QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","DOCX (*.docx);;All Files (*)")
+        self.filenme=fileName_[0]
+        fl=self.filenme.split('/')
+        fname1=fl[len(fl)-1]
+        f=fname1.split('.')
+        self.fname=f[0]
+        if self.fname=='':
+            pass
+        else:
+            self.tlabel1.setText(self.fname+'.'+f[1])
+
+    def conv(self):
+        try:
+            if self.fname=='':
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.warning)
+                msg.setText("Select a file to convert")
+                msg.setWindowTitle("Error")
+                msg.setStandardButtons(QMessageBox.Ok)
+                retval = msg.exec_()   
+            else:
+                self.convert()
+        except:
+            self.browse1()
+    def convert(self):
+        try:
+            f = open(self.filenme, 'rb')
+            b = open(file_path+'/'+self.fname+'.html', 'wb')
+            document = mammoth.convert_to_html(f)
+            b.write(document.value.encode('utf8'))
+            f.close()
+            b.close()
+            print('Done!')
+            MainWindow.back_to_home(self)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Conversion Complete")
+            msg.setWindowTitle("Success")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()   
+        except:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Conversion Failed")
+            msg.setWindowTitle("Error")
+            msg.setStandardButtons(QMessageBox.Ok)
+            retval = msg.exec_()
 
 
 
