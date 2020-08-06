@@ -1,3 +1,4 @@
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -5,6 +6,7 @@ import sys
 import img2pdf
 from PIL import Image 
 from fpdf import FPDF
+#import docx2pdf
 from docx2pdf import convert
 from moviepy.editor import *
 import json
@@ -24,7 +26,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(parent)
         central_widget = QStackedWidget()
         self.setCentralWidget(central_widget)
-        self.setWindowTitle('DigiZoc_v1.0')
+        self.setWindowTitle('DigiZoc_v1.1')
         self.resize(900,600)
         
         #self.setMaximumHeight(600)
