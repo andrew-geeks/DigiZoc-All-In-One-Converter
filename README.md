@@ -30,7 +30,6 @@
  
  License: Apache 2.0
  
- Website: www.synitesolutions.ml
  
  # Find Us
  Twitter: https://twitter.com/andrewissac20 , https://twitter.com/synitesolutions
